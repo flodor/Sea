@@ -1,0 +1,36 @@
+<?php if ($this->pageCount > 1): ?>
+  <?php if ($this->isAjax): ?>
+  	<script type="text/javascript">
+  	<!--
+  	<?php echo $this->javascript;?>
+	//-->
+	</script>
+  <?php endif; ?>
+<div class="paginationControl <?php echo ($this->last == $this->current) ? "paginationLast" : ""; ?>">
+<!-- Previous page link -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo ($this->isAjax) ? '#" onclick="return '.$this->function.'(' . $this->previous . ');' : $this->url(array('page' => $this->previous)); ?>" class="paginationControlNextPrevious"><?php echo $this->textPrevious; ?></a> |
+<?php else: ?>
+  <span class="paginationControlInactiveNextPrevious"><?php echo $this->textPrevious; ?></span> |
+<?php endif; ?>
+ 
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php if ($page != $this->current): ?>
+    <a href="<?php echo ($this->isAjax) ? '#" onclick="return '.$this->function.'(' . $page . ');' : $this->url(array('page' => $page)); ?>" class="paginationControlLink">
+        <?php echo $page; ?>
+    </a> |
+  <?php else: ?>
+    <?php echo '<span class="paginationControlCurrent">' . $page . '</span>'; ?> |
+  <?php endif; ?>
+<?php endforeach; ?>
+
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo ($this->isAjax) ? '#" onclick="return '.$this->function.'(' . $this->next . ');' : $this->url(array('page' => $this->next)); ?>" class="paginationControlNextPrevious"><?php echo $this->textNext; ?></a>
+<?php else: ?>
+  <span class="paginationControlInactiveNextPrevious" ><?php echo $this->textNext; ?></span>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<div id='paginationMore'></div>
